@@ -1,0 +1,25 @@
+[
+    {
+      "role": "Patient",
+      "message": "A 29-year-old woman was admitted to the hospital because of sore throat and peritonsillar swelling and bleeding. Symptoms did not abate with antimicrobial therapy."
+    },
+    {
+      "role": "Dr. Smith",
+      "action": "Question",
+      "message": "Could you describe in detail how and when your sore throat and peritonsillar swelling began, including any associated bleeding episodes, pain severity, and whether symptoms have changed over time?"
+    },
+    {
+      "role": "Patient",
+      "message": "She reported that approximately 7 weeks before admission she first noted a mild sore throat, which persisted despite rest and fluids and did not improve with azithromycin. Over the next days the pain worsened, interfering with sleep, and she developed right-sided throat swelling and a sensation of food sticking when swallowing. Thirty-one days before admission, drainage yielded only sanguineous fluid without purulence. Despite amoxicillin–clavulanate, symptoms waxed and waned; 2 weeks before admission pain and swelling decreased, but 8 days before admission she noted a “froggy” voice and intermittent bleeding. Four days before admission, aspiration yielded dark blood. On the morning of admission, she awoke with increased pain and swelling, felt a “pop,” and noted active bleeding, prompting evaluation."
+    },
+    {
+      "role": "Dr. Smith",
+      "action": "Question",
+      "message": "Have you experienced fevers, night sweats, unintentional weight loss, fatigue, or any other systemic symptoms during these seven weeks?"
+    },
+    {
+      "role": "Patient",
+      "message": "The patient reported fatigue but denied fevers, night sweats, or unintentional weight loss. She noted easy bruising and heavy menstrual bleeding."
+    }
+  ]
+  

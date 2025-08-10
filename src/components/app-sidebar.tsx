@@ -97,21 +97,21 @@ const data = {
       url: "/chat",
       icon: Plus,
     },
-    {
-      name: "NEJM Case 2412531",
-      url: "/chat",
-      icon: MessageSquare,
-    },
-    {
-      name: "NEJM Case 2412532",
-      url: "/chat",
-      icon: MessageSquare,
-    },
-    {
-      name: "NEJM Case 2412533",
-      url: "/chat",
-      icon: MessageSquare,
-    }
+    // {
+    //   name: "NEJM Case 2412531",
+    //   url: "/chat",
+    //   icon: MessageSquare,
+    // },
+    // {
+    //   name: "NEJM Case 2412532",
+    //   url: "/chat",
+    //   icon: MessageSquare,
+    // },
+    // {
+    //   name: "NEJM Case 2412533",
+    //   url: "/chat",
+    //   icon: MessageSquare,
+    // }
   ],
 }
 

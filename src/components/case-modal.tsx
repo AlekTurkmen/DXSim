@@ -41,7 +41,7 @@ export function CaseModal({ case: caseItem, isOpen, onClose }: CaseModalProps) {
     <Sheet open={isOpen} onOpenChange={onClose}>
       <SheetContent 
         side="bottom" 
-        className="h-auto max-h-[80vh] bg-transparent border-none p-6"
+        className="h-auto max-h-[85vh] md:max-h-[80vh] bg-transparent border-none p-3 md:p-6"
         style={{
           backgroundImage: "url('/images/bg-library.jpg')",
           backgroundSize: 'cover',
@@ -56,15 +56,15 @@ export function CaseModal({ case: caseItem, isOpen, onClose }: CaseModalProps) {
             glowIntensity="md"
             borderRadius="24px"
           >
-            <div className="p-8">
-              <SheetHeader className="p-0 mb-6">
+            <div className="p-4 md:p-8">
+              <SheetHeader className="p-0 mb-4 md:mb-6">
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
-                    <SheetTitle className="text-2xl font-bold text-white mb-2">
+                    <SheetTitle className="text-lg md:text-2xl font-bold text-white mb-2">
                       {caseItem.title}
                     </SheetTitle>
-                    <div className="flex items-center gap-4 text-sm text-blue-200">
-                      <span className="font-mono bg-blue-500/20 px-3 py-1 rounded-full">
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-xs md:text-sm text-blue-200">
+                      <span className="font-mono bg-blue-500/20 px-2 md:px-3 py-1 rounded-full text-xs md:text-sm">
                         {caseItem.short_title}
                       </span>
                       <div className="flex items-center gap-1">
@@ -82,37 +82,37 @@ export function CaseModal({ case: caseItem, isOpen, onClose }: CaseModalProps) {
               </SheetHeader>
 
               {/* Case Metadata */}
-              <div className="space-y-6">
+              <div className="space-y-4 md:space-y-6">
                 {/* Clinical Vignette Preview */}
                 <div>
-                  <h3 className="text-lg font-semibold text-white mb-3">Clinical Vignette</h3>
+                  <h3 className="text-base md:text-lg font-semibold text-white mb-2 md:mb-3">Clinical Vignette</h3>
                   <LiquidGlassCard
                     className="bg-white/10"
                     blurIntensity="sm"
                     glowIntensity="xs"
                     borderRadius="16px"
                   >
-                    <div className="p-4">
-                      <p className="text-gray-100 leading-relaxed line-clamp-4">
+                    <div className="p-3 md:p-4">
+                      <p className="text-sm md:text-base text-gray-100 leading-relaxed line-clamp-4">
                         {caseItem.clinical_vignette || "Clinical vignette will be revealed when you start the case."}
                       </p>
                     </div>
                   </LiquidGlassCard>
                 </div>
 
-                {/* Case Details */}
-                <div>
-                  <h3 className="text-lg font-semibold text-white mb-3">Case Details</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {/* Case Details - Hidden on Mobile */}
+                <div className="hidden md:block">
+                  <h3 className="text-base md:text-lg font-semibold text-white mb-2 md:mb-3">Case Details</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
                     <LiquidGlassCard
                       className="bg-white/10"
                       blurIntensity="sm"
                       glowIntensity="xs"
                       borderRadius="12px"
                     >
-                      <div className="p-4">
-                        <div className="text-sm text-gray-300 mb-1">Year</div>
-                        <div className="text-white font-medium">{caseItem.year}</div>
+                      <div className="p-3 md:p-4">
+                        <div className="text-xs md:text-sm text-gray-300 mb-1">Year</div>
+                        <div className="text-sm md:text-base text-white font-medium">{caseItem.year}</div>
                       </div>
                     </LiquidGlassCard>
                     
@@ -122,30 +122,30 @@ export function CaseModal({ case: caseItem, isOpen, onClose }: CaseModalProps) {
                       glowIntensity="xs"
                       borderRadius="12px"
                     >
-                      <div className="p-4">
-                        <div className="text-sm text-gray-300 mb-1">Dataset</div>
-                        <div className="text-white font-medium capitalize">{caseItem.dataset}</div>
+                      <div className="p-3 md:p-4">
+                        <div className="text-xs md:text-sm text-gray-300 mb-1">Dataset</div>
+                        <div className="text-sm md:text-base text-white font-medium capitalize">{caseItem.dataset}</div>
                       </div>
                     </LiquidGlassCard>
                   </div>
                   
                   {caseItem.doi && (
                     <LiquidGlassCard
-                      className="bg-white/10 mt-4"
+                      className="bg-white/10 mt-3 md:mt-4"
                       blurIntensity="sm"
                       glowIntensity="xs"
                       borderRadius="12px"
                     >
-                      <div className="p-4">
-                        <div className="text-sm text-gray-300 mb-2">DOI</div>
+                      <div className="p-3 md:p-4">
+                        <div className="text-xs md:text-sm text-gray-300 mb-2">DOI</div>
                         <a 
                           href={`https://doi.org/${caseItem.doi}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-blue-300 hover:text-blue-200 transition-colors flex items-center gap-2"
+                          className="text-xs md:text-sm text-blue-300 hover:text-blue-200 transition-colors flex items-center gap-2 break-all"
                         >
                           {caseItem.doi}
-                          <ExternalLink className="h-4 w-4" />
+                          <ExternalLink className="h-3 w-3 md:h-4 md:w-4 flex-shrink-0" />
                         </a>
                       </div>
                     </LiquidGlassCard>
@@ -153,19 +153,19 @@ export function CaseModal({ case: caseItem, isOpen, onClose }: CaseModalProps) {
                 </div>
 
                 {/* Start Case Button */}
-                <div className="flex justify-center pt-4">
+                <div className="flex justify-center pt-3 md:pt-4">
                   <Button
                     onClick={handleStartCase}
                     disabled={isStarting}
-                    className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 text-lg font-semibold rounded-xl transition-all duration-200 disabled:opacity-60"
+                    className="bg-blue-600 hover:bg-blue-700 text-white px-6 md:px-8 py-2 md:py-3 text-base md:text-lg font-semibold rounded-xl transition-all duration-200 disabled:opacity-60 w-full sm:w-auto"
                   >
                     {isStarting ? (
                       <div className="flex items-center gap-2">
-                        <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
-                        Starting Case...
+                        <div className="animate-spin rounded-full h-4 w-4 md:h-5 md:w-5 border-b-2 border-white"></div>
+                        <span className="text-sm md:text-base">Starting Case...</span>
                       </div>
                     ) : (
-                      'Start Case'
+                      <span className="text-sm md:text-base">Start Case</span>
                     )}
                   </Button>
                 </div>

@@ -42,10 +42,10 @@ function DatasetPicker({
         borderRadius="12px"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <div className="px-4 py-3 flex items-center justify-between min-w-[200px]">
+        <div className="px-3 md:px-4 py-2 md:py-3 flex items-center justify-between min-w-[180px] md:min-w-[200px]">
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 rounded-full bg-green-400"></div>
-            <span className="text-white font-medium">
+            <span className="text-sm md:text-base text-white font-medium">
               {currentDataset?.full_name || 'Select Dataset'}
             </span>
           </div>
@@ -69,7 +69,7 @@ function DatasetPicker({
               {datasets.map((dataset) => (
                 <div
                   key={dataset.id}
-                  className="px-3 py-2 text-white hover:bg-white/10 rounded cursor-pointer transition-colors"
+                  className="px-3 py-2 text-sm md:text-base text-white hover:bg-white/10 rounded cursor-pointer transition-colors"
                   onClick={() => {
                     onDatasetChange(dataset.name);
                     setIsOpen(false);
@@ -79,7 +79,7 @@ function DatasetPicker({
                 </div>
               ))}
               {datasets.length === 0 && (
-                <div className="px-3 py-2 text-white/50 cursor-not-allowed">
+                <div className="px-3 py-2 text-sm md:text-base text-white/50 cursor-not-allowed">
                   No datasets available
                 </div>
               )}
@@ -101,14 +101,14 @@ function CaseCard({ case: caseItem, onClick }: { case: Case; onClick: (caseItem:
       borderRadius="16px"
       onClick={() => onClick(caseItem)}
     >
-      <div className="p-4 h-full flex flex-col">
+      <div className="p-3 md:p-4 h-full flex flex-col">
         {/* Short Title */}
-        <div className="text-lg text-blue-300 font-mono mb-2 opacity-80">
+        <div className="text-sm md:text-lg text-blue-300 font-mono mb-2 opacity-80">
           {caseItem.short_title}
         </div>
         
         {/* Title */}
-        <div className="text-sm text-white leading-relaxed mb-3 flex-1 line-clamp-4">
+        <div className="text-xs md:text-sm text-white leading-relaxed mb-3 flex-1 line-clamp-4">
           {caseItem.title}
         </div>
         
@@ -127,7 +127,7 @@ function CaseCard({ case: caseItem, onClick }: { case: Case; onClick: (caseItem:
 // Year divider component
 function YearDivider({ year }: { year: number }) {
   return (
-    <div className="flex items-center gap-4 my-8">
+    <div className="flex items-center gap-4 my-6 md:my-8">
       <div className="flex-1 h-px bg-gradient-to-r from-transparent via-white/30 to-white/30"></div>
       <LiquidGlassCard
         className="bg-white/20"
@@ -135,8 +135,8 @@ function YearDivider({ year }: { year: number }) {
         glowIntensity="sm"
         borderRadius="12px"
       >
-        <div className="px-6 py-2">
-          <span className="text-white font-bold text-lg">{year}</span>
+        <div className="px-4 md:px-6 py-2">
+          <span className="text-white font-bold text-base md:text-lg">{year}</span>
         </div>
       </LiquidGlassCard>
       <div className="flex-1 h-px bg-gradient-to-l from-transparent via-white/30 to-white/30"></div>
@@ -304,14 +304,14 @@ export default function DatasetPage() {
             msOverflowStyle: 'none', 
           }}
         >
-          <div className="p-6">
+          <div className="p-4 md:p-6">
             {/* Header with Dataset Picker */}
-            <div className="mb-8 flex items-center justify-between">
+            <div className="mb-6 md:mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div>
-                <h1 className="text-3xl font-bold text-white mb-2">
+                <h1 className="text-xl md:text-3xl font-bold text-white mb-2">
                   {currentDataset?.full_name || 'Dataset Cases'}
                 </h1>
-                <p className="text-gray-300">
+                <p className="text-sm md:text-base text-gray-300">
                   {currentDataset?.description || 'Browse and explore clinical cases'}
                 </p>
               </div>
@@ -368,7 +368,7 @@ export default function DatasetPage() {
                 {sortedYears.map(year => (
                   <div key={year}>
                     <YearDivider year={year} />
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3 md:gap-4">
                       {groupedCases[year].map((caseItem, index) => (
                         <CaseCard 
                           key={`${caseItem.id}-${index}`} 

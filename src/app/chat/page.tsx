@@ -774,7 +774,7 @@ function ChatPageContent() {
                       key={index}
                       className={`flex ${isDrSmith ? 'justify-end' : 'justify-start'} mb-4`}
                     >
-                      <div className={`max-w-[70%] ${isDrSmith ? 'ml-12' : 'mr-12'}`}>
+                      <div className={`max-w-[85%] md:max-w-[70%] ${isDrSmith ? 'ml-2 md:ml-12' : 'mr-2 md:mr-12'}`}>
                         <LiquidGlassCard
                           className={`p-4 ${getBackgroundColor()}`}
                           blurIntensity="md"
@@ -794,7 +794,7 @@ function ChatPageContent() {
                           </div>
                           
                           {/* Message Content */}
-                          <div className={`text-lg leading-relaxed ${
+                          <div className={`text-sm md:text-lg leading-relaxed ${
                             isDrSmith ? 'text-gray-100' : 'text-gray-100'
                           }`}>
                             {message.message.startsWith('TABLE:') ? (
@@ -806,13 +806,13 @@ function ChatPageContent() {
                                 
                                 return (
                                   <div>
-                                    <h4 className="font-semibold mb-3 text-gray-50">{title}</h4>
+                                    <h4 className="font-semibold mb-3 text-gray-50 text-sm md:text-base">{title}</h4>
                                     <div className="overflow-x-auto">
                                       <table className="w-full border-collapse">
                                         <thead>
                                           <tr className="border-b border-gray-400/30">
                                             {headers.map((header, idx) => (
-                                              <th key={idx} className="text-left py-2 px-3 font-medium text-gray-100 text-base">
+                                              <th key={idx} className="text-left py-2 px-3 font-medium text-gray-100 text-sm md:text-base">
                                                 {header}
                                               </th>
                                             ))}
@@ -822,7 +822,7 @@ function ChatPageContent() {
                                           {rows.map((row, rowIdx) => (
                                             <tr key={rowIdx} className="border-b border-gray-500/20">
                                               {row.map((cell, cellIdx) => (
-                                                <td key={cellIdx} className="py-2 px-3 text-base text-gray-200">
+                                                <td key={cellIdx} className="py-2 px-3 text-sm md:text-base text-gray-200">
                                                   {cell}
                                                 </td>
                                               ))}
@@ -847,7 +847,7 @@ function ChatPageContent() {
                 {/* Loading indicator when AI is responding */}
                 {(isLoading && conversation.length > 0) && (
                   <div className="flex justify-start mb-4">
-                    <div className="max-w-[70%] mr-12">
+                    <div className="max-w-[85%] md:max-w-[70%] mr-2 md:mr-12">
                       <LiquidGlassCard
                         className={`p-4 ${selectedAction === 'Test' ? 'bg-green-500/15' : selectedAction === 'Diagnosis' ? 'bg-red-500/15' : 'bg-blue-500/15'}`}
                         blurIntensity="md"
@@ -860,7 +860,7 @@ function ChatPageContent() {
                             {responseLabels[selectedAction].label}
                           </span>
                         </div>
-                        <div className="text-lg text-gray-100 flex items-center gap-2">
+                        <div className="text-sm md:text-lg text-gray-100 flex items-center gap-2">
                           <div className="flex gap-1">
                             <div className={`w-2 h-2 rounded-full animate-pulse ${selectedAction === 'Test' ? 'bg-green-300' : selectedAction === 'Diagnosis' ? 'bg-red-300' : 'bg-blue-300'}`}></div>
                             <div className={`w-2 h-2 rounded-full animate-pulse delay-100 ${selectedAction === 'Test' ? 'bg-green-300' : selectedAction === 'Diagnosis' ? 'bg-red-300' : 'bg-blue-300'}`}></div>
@@ -885,10 +885,10 @@ function ChatPageContent() {
           style={{ backgroundColor: 'transparent' }}
         >
           <div className="mx-auto max-w-4xl">
-            {/* Input Area with Action Buttons Inline */}
-            <div className="flex items-center gap-3">
-              {/* Action Type Buttons - Inline Left */}
-              <div className="flex gap-2 flex-shrink-0">
+            {/* Input Area with Action Buttons Inline on Desktop, Stacked on Mobile */}
+            <div className="flex flex-col md:flex-row md:items-center gap-3">
+              {/* Action Type Buttons - Full Width on Mobile, Inline Left on Desktop */}
+              <div className="flex gap-2 flex-shrink-0 w-full md:w-auto justify-center md:justify-start">
                 {(['Question', 'Test', 'Diagnosis'] as ActionType[]).map((action) => {
                   const isSelected = selectedAction === action;
                   const getColors = () => {
@@ -922,71 +922,74 @@ function ChatPageContent() {
                         
                         height="44px"
                       >
-                        <span className="text-md font-semibold">{action}</span>
+                        <span className="text-sm md:text-md font-semibold">{action}</span>
                       </LiquidGlass>
                     </div>
                   );
                 })}
               </div>
 
-              {/* Text Input with Liquid Glass */}
-              <div className="flex-1">
-                <LiquidGlass
-                  className="bg-white/10 transition-all duration-200"
-                  blurIntensity="sm"
-                  glowIntensity="xs"
-                  borderRadius="10px"
-                  
-                >
-                  <textarea
-                    ref={textareaRef}
-                    value={inputValue}
-                    onChange={handleInputChange}
-                    onInput={adjustTextareaHeight}
-                    onKeyPress={handleKeyPress}
-                    placeholder={placeholders[selectedAction]}
-                    disabled={isLoading || isStreaming || !isInitialized || isLoadingCase || !!caseLoadError}
-                    className="w-full resize-none focus:outline-none bg-transparent text-gray-100 placeholder-gray-400 border-none px-3 py-3 leading-normal block disabled:opacity-60"
-                    rows={1}
-                    style={{ 
-                      minHeight: '44px',
-                      background: 'transparent',
-                      lineHeight: '1.5'
-                    }}
-                  />
-                </LiquidGlass>
-              </div>
+              {/* Text Input and Send Button Container - Full Width on Mobile */}
+              <div className="flex gap-3 w-full md:flex-1">
+                {/* Text Input with Liquid Glass */}
+                <div className="flex-1">
+                  <LiquidGlass
+                    className="bg-white/10 transition-all duration-200"
+                    blurIntensity="sm"
+                    glowIntensity="xs"
+                    borderRadius="10px"
+                    
+                  >
+                    <textarea
+                      ref={textareaRef}
+                      value={inputValue}
+                      onChange={handleInputChange}
+                      onInput={adjustTextareaHeight}
+                      onKeyPress={handleKeyPress}
+                      placeholder={placeholders[selectedAction]}
+                      disabled={isLoading || isStreaming || !isInitialized || isLoadingCase || !!caseLoadError}
+                      className="w-full resize-none focus:outline-none bg-transparent text-gray-100 placeholder-gray-400 border-none px-3 py-3 leading-normal block disabled:opacity-60"
+                      rows={1}
+                      style={{ 
+                        minHeight: '44px',
+                        background: 'transparent',
+                        lineHeight: '1.5'
+                      }}
+                    />
+                  </LiquidGlass>
+                </div>
 
-              {/* Send Button with Liquid Glass */}
-              <div 
-                className={`flex-shrink-0 ${(isLoading || isStreaming || !isInitialized || isLoadingCase || !!caseLoadError) ? 'opacity-60 cursor-not-allowed' : 'cursor-pointer'}`}
-                onClick={!isLoading && !isStreaming && isInitialized && !isLoadingCase && !caseLoadError ? handleSendMessage : undefined}
-              >
-                <LiquidGlass
-                  className="bg-blue-500/40 hover:bg-blue-500/60 text-white transition-all duration-200 p-3 flex items-center justify-center"
-                  blurIntensity="sm"
-                  glowIntensity="md"
-                  borderRadius="10px"
-                  
-                  height="44px"
+                {/* Send Button with Liquid Glass */}
+                <div 
+                  className={`flex-shrink-0 ${(isLoading || isStreaming || !isInitialized || isLoadingCase || !!caseLoadError) ? 'opacity-60 cursor-not-allowed' : 'cursor-pointer'}`}
+                  onClick={!isLoading && !isStreaming && isInitialized && !isLoadingCase && !caseLoadError ? handleSendMessage : undefined}
                 >
-                  {(isLoading || isStreaming) ? (
-                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
-                  ) : (
-                    <svg 
-                      width="20" 
-                      height="20" 
-                      viewBox="0 0 24 24" 
-                      fill="none" 
-                      stroke="currentColor" 
-                      strokeWidth="2" 
-                      strokeLinecap="round" 
-                      strokeLinejoin="round"
-                    >
-                      <path d="M12 19V5M5 12l7-7 7 7"/>
-                    </svg>
-                  )}
-                </LiquidGlass>
+                  <LiquidGlass
+                    className="bg-blue-500/40 hover:bg-blue-500/60 text-white transition-all duration-200 p-3 flex items-center justify-center"
+                    blurIntensity="sm"
+                    glowIntensity="md"
+                    borderRadius="10px"
+                    
+                    height="44px"
+                  >
+                    {(isLoading || isStreaming) ? (
+                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                    ) : (
+                      <svg 
+                        width="20" 
+                        height="20" 
+                        viewBox="0 0 24 24" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        strokeWidth="2" 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round"
+                      >
+                        <path d="M12 19V5M5 12l7-7 7 7"/>
+                      </svg>
+                    )}
+                  </LiquidGlass>
+                </div>
               </div>
             </div>
           </div>

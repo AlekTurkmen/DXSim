@@ -605,7 +605,7 @@ function ChatPageContent() {
     if (caseId) {
       loadCase(caseId);
     }
-  }, [caseId, loadCase]);
+  }, [caseId]); // Remove loadCase from dependency array to prevent infinite loop
 
   // Load case and display clinical vignette directly without API calls
   useEffect(() => {
@@ -619,7 +619,7 @@ function ChatPageContent() {
       (window as Window & {clearCachedResponse?: () => void}).clearCachedResponse = clearCachedResponse;
       console.log('Debug: Use window.clearCachedResponse() to clear cached initial response');
     }
-  }, [caseId, currentCase, loadRandomCase]);
+  }, [caseId, currentCase]); // Remove loadRandomCase from dependency array to prevent infinite loop
 
   // When currentCase is loaded, safely display the clinical vignette with validation
   useEffect(() => {
@@ -643,7 +643,7 @@ function ChatPageContent() {
       console.error('❌ Cannot display clinical vignette - case data validation failed');
       setCaseLoadError('Case data is incomplete');
     }
-  }, [currentCase, conversation.length, isLoadingCase, isGeminiInitialized, validateCaseData]);
+  }, [currentCase, conversation.length, isLoadingCase, isGeminiInitialized]); // Remove validateCaseData from dependency array
 
   return (
     <SidebarProvider>
@@ -741,7 +741,7 @@ function ChatPageContent() {
                     } else {
                       if (isTestResults) return 'bg-green-500/15';
                       if (isDiagnosisResult) return 'bg-red-500/15';
-                      if (isClinicalVignette) return 'bg-blue-500/15'; // Clinical Vignette - same as Patient
+                      if (isClinicalVignette) return 'bg-purple-500/15'; // Clinical Vignette - purple
                       return 'bg-blue-500/15'; // Patient - changed to blue
                     }
                   };
@@ -756,7 +756,7 @@ function ChatPageContent() {
                     } else {
                       if (isTestResults) return 'bg-green-600/40 text-green-100';
                       if (isDiagnosisResult) return 'bg-red-600/40 text-red-100';
-                      if (isClinicalVignette) return 'bg-blue-600/40 text-blue-100'; // Clinical Vignette - same as Patient
+                      if (isClinicalVignette) return 'bg-purple-600/40 text-purple-100'; // Clinical Vignette - purple
                       return 'bg-blue-600/40 text-blue-100'; // Patient - changed to blue
                     }
                   };
